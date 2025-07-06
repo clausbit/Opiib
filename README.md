@@ -1,426 +1,772 @@
 # 🎰 Casino Roll - Telegram Mini App
 
-Современное казино-приложение для Telegram с неоновым дизайном, плавными анимациями и интеграцией с криптовалютными платежами.
+[![Domain](https://img.shields.io/badge/Domain-agrobmin.com.ua-blue)](https://agrobmin.com.ua)
+[![Python](https://img.shields.io/badge/Python-3.12-green)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-red)](https://fastapi.tiangolo.com)
+[![Telegram](https://img.shields.io/badge/Telegram-WebApp-blue)](https://core.telegram.org/bots/webapps)
+
+> Современное казино на базе Telegram Mini App с неоновым дизайном и плавными анимациями
+
+## 📱 Демо и Ссылки
+
+- **🌐 Домен:** https://agrobmin.com.ua
+- **🤖 Telegram Бот:** https://t.me/your_casino_bot
+- **🔗 API Документация:** https://agrobmin.com.ua/api/docs
+- **📊 Статус Сервера:** https://agrobmin.com.ua/health
 
 ## ✨ Особенности
 
-- 🎨 **Неоновый дизайн** - Современный UI с неоновыми эффектами и плавными анимациями
-- 🎰 **Игра в рулетку** - Классическая цветная рулетка с множителями
-- 💰 **Crypto платежи** - Поддержка TON, BTC, ETH, USDT и других криптовалют
-- ⭐ **Telegram Stars** - Интеграция с внутриигровой валютой Telegram
-- 👥 **Реферальная система** - Приглашайте друзей и получайте процент с их ставок
-- 📱 **Mobile First** - Полностью адаптированный под мобильные устройства
-- 🔄 **Real-time** - Обновления в реальном времени через WebSocket
-- 🔒 **Безопасность** - JWT авторизация и защищенные API
+### 🎨 Дизайн и UI
+- **Неоновый дизайн** с эффектами свечения
+- **Плавные анимации** всех элементов
+- **Адаптивная верстка** для всех устройств
+- **Частицы и эффекты** для атмосферы
+- **Темная тема** оптимизированная для Telegram
 
-## 🚀 Технологический стек
+### 🎰 Игровая Механика
+- **Цветная рулетка** с 4 цветами
+- **Честная игра** с прозрачными шансами
+- **Множители:**
+  - 🔴 Красный: x2.2 (45.45% шанс)
+  - 🔵 Синий: x2.2 (45.45% шанс) 
+  - 🟢 Зеленый: x5 (9% шанс)
+  - 🟡 Желтый: x45 (0.22% шанс)
 
-### Frontend
-- **React 18** - Современная библиотека для UI
-- **Styled Components** - CSS-in-JS стилизация
-- **Framer Motion** - Плавные анимации
-- **Telegram Web App SDK** - Интеграция с Telegram
-- **Socket.io Client** - Связь в реальном времени
+### 🔊 Звуки и Эффекты
+- **Звуковые эффекты** для всех действий
+- **Haptic Feedback** на iOS устройствах
+- **Конфетти анимации** при выигрыше
+- **Звуки рулетки** с реалистичным вращением
 
-### Backend
-- **Node.js + Express** - Серверная часть
-- **MongoDB + Mongoose** - База данных
-- **Socket.io** - WebSocket соединения
-- **JWT** - Аутентификация
-- **Rate Limiting** - Защита от спама
+### 💰 Платежи
+- **⭐ Telegram Stars** - нативные платежи
+- **₿ Криптовалюты** (TON, BTC, ETH, USDT, BNB)
+- **🔗 Wallet Connect** интеграция
+- **💸 Быстрые выплаты**
 
-## 📦 Установка
+### 👥 Социальные Функции
+- **Реферальная программа** (5% + 1% + 1%)
+- **История игр** с детальной статистикой
+- **Рейтинги игроков**
+- **Достижения и награды**
 
-### Предварительные требования
+### 🔐 Безопасность
+- **JWT аутентификация**
+- **Rate Limiting защита**
+- **Валидация Telegram данных**
+- **HTTPS обязательно**
+- **Защита от ботов**
 
-- Node.js 16+ 
-- MongoDB 4.4+
-- Telegram Bot Token
-- Git
+## 🚀 Быстрый Старт
 
-### 1. Клонирование репозитория
-
-```bash
-git clone https://github.com/your-username/telegram-casino-miniapp.git
-cd telegram-casino-miniapp
-```
-
-### 2. Установка зависимостей
-
-```bash
-# Установка зависимостей для всего проекта
-npm run install:all
-
-# Или установка по отдельности:
-npm install
-cd client && npm install
-cd ../server && npm install
-```
-
-### 3. Настройка переменных окружения
+### Автоматическая Установка
 
 ```bash
-# Копируем примеры конфигурации
-cp server/.env.example server/.env
+# 1. Клонируем репозиторий
+git clone https://github.com/yourusername/casino-roll.git
+cd casino-roll
+
+# 2. Копируем SSL сертификаты
+cp /path/to/sertificat.key .
+cp /path/to/sertificat.pem .
+
+# 3. Запускаем автоматическую установку
+chmod +x start.sh
+./start.sh
 ```
 
-Заполните файл `server/.env` своими данными:
+### Ручная Установка
+
+```bash
+# 1. Создаем виртуальное окружение Python 3.12
+python3.12 -m venv venv
+source venv/bin/activate
+
+# 2. Устанавливаем зависимости
+pip install -r requirements.txt
+
+# 3. Настраиваем переменные окружения
+cp .env.example .env
+nano .env  # Редактируем настройки
+
+# 4. Запускаем сервер
+python3.12 -m backend.main
+```
+
+## ⚙️ Конфигурация
+
+### Основные Настройки (.env)
 
 ```env
-# Обязательные настройки
-MONGODB_URI=mongodb://localhost:27017/casino
-JWT_SECRET=your-super-secret-jwt-key-32-chars
-TELEGRAM_BOT_TOKEN=1234567890:AABBCCDDEEFFaabbccddeeff
-TELEGRAM_BOT_USERNAME=your_casino_bot
+# Сервер
+DOMAIN=agrobmin.com.ua
+SSL_CERT_PATH=ssl/sertificat.pem
+SSL_KEY_PATH=ssl/sertificat.key
 
-# Опциональные настройки
-NODE_ENV=development
-PORT=3001
-CLIENT_URL=http://localhost:3000
+# Telegram
+TELEGRAM_BOT_TOKEN=7967948563:AAEcl-6mW5kd4jaqjsRIqnv34egBWmh1LiI
+WEBHOOK_URL=https://agrobmin.com.ua/webhook
+WEBAPP_URL=https://agrobmin.com.ua
+
+# База данных
+MONGODB_URL=mongodb://localhost:27017/casino_roll
+REDIS_URL=redis://localhost:6379
+
+# Игра
+STARTING_BALANCE=100.0
+MIN_BET=1.0
+MAX_BET=1000.0
 ```
 
-### 4. Создание Telegram бота
+### Создание Telegram Бота
 
-1. Откройте [@BotFather](https://t.me/BotFather) в Telegram
-2. Создайте нового бота командой `/newbot`
-3. Получите токен бота и добавьте в `.env`
-4. Настройте Web App командой `/newapp`
+1. **Создайте бота** через [@BotFather](https://t.me/botfather)
+2. **Получите токен** и добавьте в `.env`
+3. **Настройте Menu Button:**
+   ```
+   /setmenubutton
+   @your_bot_name
+   🎰 Играть
+   https://agrobmin.com.ua
+   ```
+4. **Настройте Web App:**
+   ```
+   /newapp
+   @your_bot_name
+   Casino Roll
+   https://agrobmin.com.ua
+   ```
 
-### 5. Запуск приложения
-
-```bash
-# Запуск в development режиме (фронтенд + бэкенд)
-npm run dev
-
-# Или запуск по отдельности:
-npm run server:dev  # Запуск только сервера
-npm run client:dev  # Запуск только клиента
-```
-
-## 🔧 Настройка Telegram Mini App
-
-### 1. Настройка бота
-
-После создания бота в BotFather, выполните следующие команды:
+## 🏗️ Архитектура Проекта
 
 ```
-/setdescription - Установите описание бота
-/setabouttext - Установите информацию о боте
-/setuserpic - Загрузите аватар бота
-/setcommands - Настройте команды:
-start - Начать игру
-help - Помощь
-balance - Проверить баланс
+casino-roll/
+├── 🐍 backend/                 # Python FastAPI Backend
+│   ├── main.py                # Главный файл сервера
+│   ├── config.py              # Настройки приложения
+│   ├── database.py            # MongoDB модели
+│   ├── telegram_bot.py        # Telegram бот
+│   ├── routes/                # API маршруты
+│   │   ├── auth.py           # Аутентификация
+│   │   ├── game.py           # Игровая логика
+│   │   ├── user.py           # Пользователи
+│   │   ├── payment.py        # Платежи
+│   │   └── admin.py          # Админ панель
+│   ├── middleware/           # Промежуточное ПО
+│   └── utils/               # Утилиты
+├── 🎨 frontend/              # Frontend Files
+├── 📄 templates/            # HTML шаблоны
+│   └── index.html          # Главная страница
+├── 🎭 static/              # Статические файлы
+│   ├── css/               # Стили
+│   │   └── main.css      # Основные стили
+│   ├── js/               # JavaScript
+│   │   ├── app.js       # Главное приложение
+│   │   ├── game.js      # Игровая логика
+│   │   ├── telegram.js  # Telegram интеграция
+│   │   ├── sounds.js    # Звуковые эффекты
+│   │   ├── ui.js        # UI компоненты
+│   │   └── api.js       # API клиент
+│   ├── images/          # Изображения
+│   └── sounds/          # Звуковые файлы
+├── 🔒 ssl/               # SSL сертификаты
+├── 📁 logs/              # Лог файлы
+├── 🔧 start.sh           # Скрипт установки
+├── 🚀 run.sh             # Скрипт запуска
+└── 📋 requirements.txt   # Python зависимости
 ```
 
-### 2. Создание Web App
+## 🎮 Игровая Механика
 
+### Цвета и Вероятности
+
+| Цвет | Множитель | Вероятность | Дом. Преимущество |
+|------|-----------|-------------|------------------|
+| 🔴 Красный | x2.2 | 45.45% | 5% |
+| 🔵 Синий | x2.2 | 45.45% | 5% |
+| 🟢 Зеленый | x5.0 | 9% | 5% |
+| 🟡 Желтый | x45.0 | 0.22% | 5% |
+
+### Формула Расчета
+
+```python
+# Пример расчета выигрыша
+def calculate_win(bet_amount, color, result_color):
+    if color == result_color:
+        multiplier = GAME_COLORS[color]['multiplier']
+        return bet_amount * multiplier
+    return 0
+
+# Пример генерации результата
+def generate_result():
+    random_value = random.random()
+    cumulative = 0
+    
+    for color, data in GAME_COLORS.items():
+        cumulative += data['probability']
+        if random_value <= cumulative:
+            return color
 ```
-/newapp - Создать новое приложение
-/editapp - Редактировать приложение
-/deleteapp - Удалить приложение
-```
 
-Укажите следующие параметры:
-- **URL**: `https://your-domain.com` (в production)
-- **Short name**: `casino` (короткое имя для URL)
-
-### 3. Настройка домена
-
-Для production развертывания:
-
-1. Получите SSL сертификат
-2. Настройте reverse proxy (nginx/Apache)
-3. Обновите переменные окружения:
-
-```env
-NODE_ENV=production
-CLIENT_URL=https://your-domain.com
-```
-
-## 💳 Настройка платежей
+## 💳 Интеграция Платежей
 
 ### Telegram Stars
 
-Для работы с Telegram Stars не требуется дополнительных настроек - используется встроенное API Telegram.
-
-### Криптовалютные платежи
-
-1. **TON Wallet Integration**
-   ```env
-   TON_WALLET_ADDRESS=your-ton-wallet-address
-   TON_API_KEY=your-ton-api-key
-   ```
-
-2. **CryptoBot (рекомендуется)**
-   - Создайте аккаунт в [CryptoBot](https://t.me/CryptoBot)
-   - Получите API ключи
-   - Настройте webhook для уведомлений
-
-3. **Другие провайдеры**
-   - CoinPayments
-   - Coinbase Commerce
-   - BitPay
-
-## 📁 Структура проекта
-
-```
-telegram-casino-miniapp/
-├── client/                 # React приложение
-│   ├── public/
-│   │   ├── components/     # React компоненты
-│   │   ├── pages/         # Страницы приложения
-│   │   ├── hooks/         # Custom hooks
-│   │   ├── utils/         # Утилиты
-│   │   └── styles/        # Стили
-│   └── package.json
-├── server/                # Express сервер
-│   ├── src/
-│   │   ├── controllers/   # Контроллеры API
-│   │   ├── models/        # MongoDB модели
-│   │   ├── routes/        # API маршруты
-│   │   ├── services/      # Бизнес логика
-│   │   ├── middleware/    # Middleware функции
-│   │   └── utils/         # Серверные утилиты
-│   ├── .env.example       # Пример конфигурации
-│   └── package.json
-├── package.json           # Корневой package.json
-└── README.md
+```python
+# Создание инвойса для Telegram Stars
+async def create_stars_invoice(amount):
+    return await bot.create_invoice_link(
+        title="Пополнение баланса",
+        description=f"Пополнение на {amount} AI",
+        payload=f"deposit_{user_id}_{amount}",
+        provider_token="",  # Пустой для Stars
+        currency="XTR",
+        prices=[LabeledPrice(label="AI", amount=amount)]
+    )
 ```
 
-## 🎮 Игровая логика
+### Криптовалюты
 
-### Цвета и множители
-
-- 🔴 **Красный**: x2.2 (45.45% шанс)
-- 🔵 **Синий**: x2.2 (45.45% шанс)  
-- 🟢 **Зеленый**: x5 (20% шанс)
-- 🟡 **Желтый**: x45 (2.22% шанс)
-
-### House Edge
-
-Настраивается в переменных окружения:
-```env
-HOUSE_EDGE=0.05  # 5% комиссия казино
+```python
+# Интеграция с криптовалютными API
+SUPPORTED_CURRENCIES = {
+    'TON': {'network': 'TON', 'decimals': 9},
+    'BTC': {'network': 'Bitcoin', 'decimals': 8},
+    'ETH': {'network': 'Ethereum', 'decimals': 18},
+    'USDT': {'network': 'Ethereum', 'decimals': 6},
+    'BNB': {'network': 'BSC', 'decimals': 18}
+}
 ```
 
-### Лимиты ставок
+## 🔊 Звуковая Система
 
-```env
-MIN_BET=1        # Минимальная ставка
-MAX_BET=1000     # Максимальная ставка
-STARTING_BALANCE=100  # Стартовый баланс
+### Поддерживаемые Звуки
+
+- **🎰 Рулетка:** `roulette-spin.mp3`
+- **🎉 Выигрыш:** `win.mp3`
+- **❌ Проигрыш:** `lose.mp3`
+- **🖱️ Клик:** `click.mp3`
+
+### Добавление Звуков
+
+```bash
+# Добавьте звуковые файлы в static/sounds/
+cp your-sound.mp3 static/sounds/
+cp your-sound.ogg static/sounds/  # Для совместимости
 ```
-
-## 👥 Реферальная система
-
-### Структура комиссий
-
-- **1-й уровень**: 5% с каждой ставки
-- **2-й уровень**: 1% с каждой ставки  
-- **3-й уровень**: 1% с каждой ставки
-
-### Создание реферальных ссылок
 
 ```javascript
-https://t.me/your_bot?start=ref_USER_ID
+// Использование в коде
+soundManager.play('your-sound', { volume: 0.7 });
 ```
 
-## 🛠️ Разработка
+## 🎨 Кастомизация Дизайна
 
-### Команды разработки
+### CSS Переменные
 
-```bash
-# Запуск в режиме разработки
-npm run dev
-
-# Сборка клиента
-npm run build
-
-# Тестирование
-npm test
-
-# Линтинг
-npm run lint
+```css
+:root {
+    /* Неоновые цвета */
+    --neon-cyan: #00fff0;
+    --neon-purple: #b300ff;
+    --neon-pink: #ff0080;
+    --neon-green: #39ff14;
+    
+    /* Фоны */
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a2e;
+    
+    /* Анимации */
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.3s ease;
+}
 ```
 
-### Добавление новых игр
+### Добавление Анимаций
 
-1. Создайте компонент игры в `client/src/components/games/`
-2. Добавьте API эндпоинты в `server/src/routes/`
-3. Обновите игровую логику в `server/src/services/GameService.js`
+```css
+@keyframes customAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
 
-### Добавление платежных провайдеров
-
-1. Создайте сервис в `server/src/services/payments/`
-2. Добавьте маршруты в `server/src/routes/payment.js`
-3. Обновите frontend в `client/src/pages/DepositPage.js`
-
-## 🚀 Развертывание
-
-### Docker (рекомендуется)
-
-```bash
-# Создайте Dockerfile в корне проекта
-docker build -t casino-app .
-docker run -p 3001:3001 casino-app
+.custom-element {
+    animation: customAnimation 1s ease-in-out infinite;
+}
 ```
 
-### VPS/Dedicated сервер
-
-1. **Установите зависимости**
-   ```bash
-   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-   sudo apt-get install -y nodejs mongodb nginx
-   ```
-
-2. **Настройте nginx**
-   ```nginx
-   server {
-       listen 80;
-       server_name your-domain.com;
-       
-       location / {
-           proxy_pass http://localhost:3001;
-           proxy_http_version 1.1;
-           proxy_set_header Upgrade $http_upgrade;
-           proxy_set_header Connection 'upgrade';
-           proxy_set_header Host $host;
-           proxy_cache_bypass $http_upgrade;
-       }
-   }
-   ```
-
-3. **Настройте SSL с Let's Encrypt**
-   ```bash
-   sudo certbot --nginx -d your-domain.com
-   ```
-
-### Heroku
-
-```bash
-# Добавьте переменные окружения
-heroku config:set NODE_ENV=production
-heroku config:set MONGODB_URI=mongodb://...
-heroku config:set TELEGRAM_BOT_TOKEN=...
-
-# Деплой
-git push heroku main
-```
-
-## 📊 Мониторинг
-
-### Логирование
-
-Логи сохраняются в:
-- Development: консоль
-- Production: файлы + Sentry (опционально)
-
-### Метрики
-
-- Количество игр
-- Общий объем ставок
-- Прибыль/убытки
-- Активные пользователи
+## 📊 Мониторинг и Аналитика
 
 ### Health Check
 
 ```bash
-curl http://localhost:3001/health
+curl https://agrobmin.com.ua/health
 ```
 
-## 🔒 Безопасность
-
-### Основные меры
-
-- JWT токены для аутентификации
-- Rate limiting для API
-- Валидация Telegram данных
-- HTTPS обязателен в production
-- Шифрование чувствительных данных
-
-### Telegram валидация
-
-```javascript
-// Проверка подлинности данных от Telegram
-const crypto = require('crypto');
-
-function validateTelegramAuth(data, botToken) {
-  const secret = crypto.createHash('sha256').update(botToken).digest();
-  const hash = data.hash;
-  delete data.hash;
-  
-  const dataString = Object.keys(data)
-    .sort()
-    .map(key => `${key}=${data[key]}`)
-    .join('\n');
-    
-  const signature = crypto.createHmac('sha256', secret)
-    .update(dataString)
-    .digest('hex');
-    
-  return signature === hash;
+```json
+{
+    "status": "healthy",
+    "service": "Casino Roll",
+    "domain": "agrobmin.com.ua",
+    "version": "1.0.0",
+    "python": "3.12"
 }
 ```
 
-## 🐛 Troubleshooting
+### Логирование
 
-### Частые проблемы
+```python
+# Настройка логирования
+import logging
 
-1. **Telegram Web App не загружается**
-   - Проверьте HTTPS в production
-   - Убедитесь что домен указан в настройках бота
-
-2. **База данных не подключается**
-   - Проверьте MongoDB URI
-   - Убедитесь что MongoDB запущен
-
-3. **Платежи не работают**
-   - Проверьте API ключи
-   - Настройте webhook URLs
-
-4. **WebSocket ошибки**
-   - Проверьте CORS настройки
-   - Убедитесь что порты открыты
-
-### Логи отладки
-
-```bash
-# Включить debug логи
-DEBUG=* npm run dev
-
-# Просмотр логов MongoDB
-tail -f /var/log/mongodb/mongod.log
-
-# Просмотр системных логов
-journalctl -u casino-app -f
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('logs/casino.log'),
+        logging.StreamHandler()
+    ]
+)
 ```
 
-## 📝 Лицензия
+## 🚀 Развертывание
 
-MIT License - см. [LICENSE](LICENSE) файл.
+### Docker
 
-## 🤝 Вклад в проект
+```dockerfile
+FROM python:3.12-slim
 
-1. Fork проекта
-2. Создайте feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit изменения (`git commit -m 'Add some AmazingFeature'`)
-4. Push в branch (`git push origin feature/AmazingFeature`)
-5. Откройте Pull Request
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+EXPOSE 8000
+
+CMD ["python3.12", "-m", "backend.main"]
+```
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  casino-roll:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongo:27017/casino_roll
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+  
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo_data:/data/db
+  
+  redis:
+    image: redis:7-alpine
+
+volumes:
+  mongo_data:
+```
+
+### VPS Развертывание
+
+```bash
+# 1. Настройка сервера
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3.12 python3.12-venv nginx mongodb redis-server
+
+# 2. Настройка Nginx
+sudo nano /etc/nginx/sites-available/casino-roll
+
+server {
+    listen 443 ssl http2;
+    server_name agrobmin.com.ua;
+    
+    ssl_certificate /path/to/sertificat.pem;
+    ssl_certificate_key /path/to/sertificat.key;
+    
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+
+# 3. Включение сайта
+sudo ln -s /etc/nginx/sites-available/casino-roll /etc/nginx/sites-enabled/
+sudo systemctl reload nginx
+
+# 4. Автозапуск
+sudo nano /etc/systemd/system/casino-roll.service
+
+[Unit]
+Description=Casino Roll Service
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/var/www/casino-roll
+Environment=PATH=/var/www/casino-roll/venv/bin
+ExecStart=/var/www/casino-roll/venv/bin/python -m backend.main
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+sudo systemctl enable casino-roll
+sudo systemctl start casino-roll
+```
+
+### Heroku
+
+```bash
+# 1. Установка Heroku CLI
+curl https://cli-assets.heroku.com/install.sh | sh
+
+# 2. Логин и создание приложения
+heroku login
+heroku create casino-roll-app
+
+# 3. Настройка переменных
+heroku config:set TELEGRAM_BOT_TOKEN=your_token
+heroku config:set MONGODB_URL=mongodb+srv://...
+heroku config:set DOMAIN=casino-roll-app.herokuapp.com
+
+# 4. Деплой
+git push heroku main
+```
+
+## 🔧 API Документация
+
+### Аутентификация
+
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+    "initData": "telegram_init_data",
+    "user": {
+        "id": 123456789,
+        "first_name": "John",
+        "username": "johndoe"
+    }
+}
+```
+
+### Игра
+
+```http
+POST /api/game/play
+Authorization: Bearer your_jwt_token
+Content-Type: application/json
+
+{
+    "color": "red",
+    "amount": 10.0
+}
+```
+
+### Получение Баланса
+
+```http
+GET /api/user/balance
+Authorization: Bearer your_jwt_token
+```
+
+### Пополнение
+
+```http
+POST /api/payment/deposit
+Authorization: Bearer your_jwt_token
+Content-Type: application/json
+
+{
+    "method": "telegram_stars",
+    "amount": 100.0
+}
+```
+
+## 🛡️ Безопасность
+
+### Проверка Telegram Данных
+
+```python
+import hmac
+import hashlib
+from urllib.parse import unquote
+
+def validate_telegram_data(init_data: str, bot_token: str) -> bool:
+    try:
+        parsed_data = dict(x.split('=') for x in init_data.split('&'))
+        hash_value = parsed_data.pop('hash')
+        
+        data_check_string = '\n'.join(f"{k}={unquote(v)}" 
+                                     for k, v in sorted(parsed_data.items()))
+        
+        secret_key = hashlib.sha256(bot_token.encode()).digest()
+        expected_hash = hmac.new(secret_key, data_check_string.encode(), 
+                               hashlib.sha256).hexdigest()
+        
+        return hmac.compare_digest(hash_value, expected_hash)
+    except:
+        return False
+```
+
+### Rate Limiting
+
+```python
+from fastapi import Request, HTTPException
+import time
+
+class RateLimiter:
+    def __init__(self, max_requests: int = 100, window: int = 3600):
+        self.max_requests = max_requests
+        self.window = window
+        self.requests = {}
+    
+    def is_allowed(self, identifier: str) -> bool:
+        now = time.time()
+        if identifier not in self.requests:
+            self.requests[identifier] = []
+        
+        # Очищаем старые запросы
+        self.requests[identifier] = [
+            req_time for req_time in self.requests[identifier]
+            if now - req_time < self.window
+        ]
+        
+        if len(self.requests[identifier]) >= self.max_requests:
+            return False
+        
+        self.requests[identifier].append(now)
+        return True
+```
+
+## 🧪 Тестирование
+
+### Юнит Тесты
+
+```python
+import pytest
+from backend.main import app
+from fastapi.testclient import TestClient
+
+client = TestClient(app)
+
+def test_health_check():
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json()["status"] == "healthy"
+
+def test_game_logic():
+    from backend.game import calculate_win
+    
+    # Тест выигрыша
+    assert calculate_win(10, "red", "red") == 22.0
+    
+    # Тест проигрыша
+    assert calculate_win(10, "red", "blue") == 0.0
+```
+
+### Нагрузочное Тестирование
+
+```python
+import asyncio
+import aiohttp
+
+async def load_test():
+    async with aiohttp.ClientSession() as session:
+        tasks = []
+        for i in range(1000):
+            task = session.get("https://agrobmin.com.ua/health")
+            tasks.append(task)
+        
+        responses = await asyncio.gather(*tasks)
+        print(f"Completed {len(responses)} requests")
+
+asyncio.run(load_test())
+```
+
+## 🐛 Отладка и Решение Проблем
+
+### Частые Проблемы
+
+#### 1. SSL Сертификаты
+
+```bash
+# Проверка сертификатов
+openssl x509 -in ssl/sertificat.pem -text -noout
+openssl rsa -in ssl/sertificat.key -check
+
+# Права доступа
+chmod 600 ssl/sertificat.key
+chmod 644 ssl/sertificat.pem
+```
+
+#### 2. MongoDB Подключение
+
+```bash
+# Проверка статуса
+sudo systemctl status mongod
+
+# Проверка подключения
+mongo --eval "db.adminCommand('ismaster')"
+
+# Логи
+sudo journalctl -u mongod -f
+```
+
+#### 3. Telegram Webhook
+
+```bash
+# Проверка webhook
+curl -X GET "https://api.telegram.org/bot$BOT_TOKEN/getWebhookInfo"
+
+# Установка webhook
+curl -X POST "https://api.telegram.org/bot$BOT_TOKEN/setWebhook" \
+     -d "url=https://agrobmin.com.ua/webhook"
+```
+
+#### 4. Python Зависимости
+
+```bash
+# Переустановка зависимостей
+pip install --upgrade --force-reinstall -r requirements.txt
+
+# Проверка конфликтов
+pip check
+```
+
+### Логи
+
+```bash
+# Просмотр логов приложения
+tail -f logs/casino.log
+
+# Логи Nginx
+sudo tail -f /var/log/nginx/error.log
+
+# Системные логи
+sudo journalctl -f -u casino-roll
+```
+
+## 📈 Производительность
+
+### Оптимизация
+
+1. **Кэширование Redis**
+2. **Сжатие Gzip**
+3. **Минификация CSS/JS**
+4. **CDN для статики**
+5. **Индексы MongoDB**
+
+### Метрики
+
+```python
+import time
+import psutil
+
+def get_system_metrics():
+    return {
+        "cpu_percent": psutil.cpu_percent(),
+        "memory_percent": psutil.virtual_memory().percent,
+        "disk_usage": psutil.disk_usage('/').percent,
+        "uptime": time.time() - psutil.boot_time()
+    }
+```
+
+## 🤝 Участие в Разработке
+
+### Внесение Вклада
+
+1. **Fork** репозитория
+2. Создайте **feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit** изменения (`git commit -m 'Add amazing feature'`)
+4. **Push** в branch (`git push origin feature/amazing-feature`)
+5. Создайте **Pull Request**
+
+### Кодстиль
+
+```python
+# Используйте Black для форматирования
+pip install black
+black .
+
+# Проверка типов с mypy
+pip install mypy
+mypy backend/
+
+# Линтер
+pip install flake8
+flake8 backend/
+```
 
 ## 📞 Поддержка
 
-- **Email**: support@your-domain.com
-- **Telegram**: [@your_support_bot](https://t.me/your_support_bot)
-- **Issues**: [GitHub Issues](https://github.com/your-username/telegram-casino-miniapp/issues)
+### Контакты
 
-## 🙏 Благодарности
+- **💬 Telegram:** [@support](https://t.me/support)
+- **📧 Email:** support@agrobmin.com.ua
+- **🌐 Сайт:** https://agrobmin.com.ua
+- **📋 Issues:** [GitHub Issues](https://github.com/yourusername/casino-roll/issues)
 
-- [Telegram Web Apps](https://core.telegram.org/bots/webapps) - за API
-- [React](https://reactjs.org/) - за отличную библиотеку
-- [Framer Motion](https://www.framer.com/motion/) - за анимации
-- [Styled Components](https://styled-components.com/) - за стилизацию
+### FAQ
+
+**Q: Как изменить множители цветов?**
+A: Отредактируйте переменные в `.env` файле:
+```env
+RED_MULTIPLIER=2.2
+BLUE_MULTIPLIER=2.2
+GREEN_MULTIPLIER=5.0
+YELLOW_MULTIPLIER=45.0
+```
+
+**Q: Как добавить новые звуки?**
+A: Поместите файлы в `static/sounds/` и обновите `sounds.js`
+
+**Q: Как настроить свой домен?**
+A: Обновите `DOMAIN` в `.env` и настройте DNS записи
+
+## 📄 Лицензия
+
+```
+MIT License
+
+Copyright (c) 2024 Casino Roll
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 ---
 
-⭐ **Поставьте звезду если проект был полезен!**
+<div align="center">
+
+**🎰 Casino Roll** - Сделано с ❤️ для Telegram
+
+[⭐ Star](https://github.com/yourusername/casino-roll) • [🐛 Report Bug](https://github.com/yourusername/casino-roll/issues) • [✨ Request Feature](https://github.com/yourusername/casino-roll/issues)
+
+</div>
