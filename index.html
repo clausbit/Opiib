@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Neon Roll Casino</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="back-btn" id="backBtn" style="display: none;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">
+                        <img id="avatarImg" src="" alt="User" style="display: none;">
+                        <div id="avatarPlaceholder" class="avatar-placeholder">?</div>
+                    </div>
+                    <div class="user-details">
+                        <div class="username" id="username">Loading...</div>
+                        <div class="user-id" id="userId"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="balance-container">
+                <div class="balance-icon">💰</div>
+                <span class="balance-amount" id="balance">0.00 AI</span>
+            </div>
+            <button class="menu-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                    <circle cx="19" cy="12" r="1" fill="currentColor"/>
+                    <circle cx="5" cy="12" r="1" fill="currentColor"/>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Game Screen -->
+            <div class="screen game-screen active" id="gameScreen">
+                <!-- Game Status -->
+                <div class="game-status" id="gameStatus">
+                    <div class="rolling-indicator" id="rollingIndicator" style="display: none;">
+                        <div class="rolling-text">ROLLING IN <span id="rollingTimer">10.00</span></div>
+                        <div class="rolling-arrow">▼</div>
+                    </div>
+                </div>
+
+                <!-- Game Grid -->
+                <div class="game-grid" id="gameGrid">
+                    <div class="grid-cell red" data-color="red" data-multiplier="2.2"></div>
+                    <div class="grid-cell blue" data-color="blue" data-multiplier="2.2"></div>
+                    <div class="grid-cell green" data-color="green" data-multiplier="5"></div>
+                    <div class="grid-cell red" data-color="red" data-multiplier="2.2"></div>
+                    <div class="grid-cell green" data-color="green" data-multiplier="5"></div>
+                    <div class="grid-cell red" data-color="red" data-multiplier="2.2"></div>
+                    <div class="grid-cell blue" data-color="blue" data-multiplier="2.2"></div>
+                    <div class="grid-cell green" data-color="green" data-multiplier="5"></div>
+                    <div class="grid-cell yellow" data-color="yellow" data-multiplier="45"></div>
+                </div>
+
+                <!-- Last 5 Games -->
+                <div class="last-games">
+                    <span>Last 5 games:</span>
+                    <div class="game-history" id="gameHistory">
+                        <div class="history-dot red"></div>
+                        <div class="history-dot blue"></div>
+                        <div class="history-dot blue"></div>
+                        <div class="history-dot green"></div>
+                        <div class="history-dot blue"></div>
+                    </div>
+                </div>
+
+                <!-- Players/Bets Section -->
+                <div class="players-section">
+                    <div class="section-header">
+                        <button class="tab-btn active" data-tab="players">Players/Bets ▼</button>
+                        <button class="tab-btn" data-tab="history">History</button>
+                    </div>
+                    <div class="players-list" id="playersList">
+                        <!-- Players will be dynamically added -->
+                    </div>
+                </div>
+
+                <!-- Betting Controls -->
+                <div class="betting-controls">
+                    <div class="bet-amount-controls">
+                        <button class="bet-control-btn" data-action="min">Min</button>
+                        <button class="bet-control-btn" data-action="half">1/2</button>
+                        <input type="number" class="bet-amount-input" id="betAmount" value="5" min="1" max="10000">
+                        <button class="bet-control-btn" data-action="double">x2</button>
+                        <button class="bet-control-btn" data-action="max">Max</button>
+                    </div>
+                    <div class="win-buttons">
+                        <button class="win-btn red" data-color="red" data-multiplier="2.2">Win X2.2</button>
+                        <button class="win-btn green" data-color="green" data-multiplier="5">Win X5</button>
+                        <button class="win-btn blue" data-color="blue" data-multiplier="2.2">Win X2.2</button>
+                        <button class="win-btn yellow" data-color="yellow" data-multiplier="45">Win X45</button>
+                    </div>
+                </div>
+
+                <!-- Game Started Notification -->
+                <div class="game-notification" id="gameNotification" style="display: none;">
+                    <div class="notification-content">
+                        The game has started
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deposit Screen -->
+            <div class="screen deposit-screen" id="depositScreen">
+                <div class="screen-title">TOP UP BALANCE</div>
+                <div class="crypto-grid">
+                    <div class="crypto-option" data-crypto="ton">
+                        <div class="crypto-icon">🔷</div>
+                        <div class="crypto-name">TON</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="usdt">
+                        <div class="crypto-icon">💵</div>
+                        <div class="crypto-name">Tether TRC20</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="trx">
+                        <div class="crypto-icon">🔴</div>
+                        <div class="crypto-name">TRON</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="bnb">
+                        <div class="crypto-icon">🟡</div>
+                        <div class="crypto-name">BNB</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="btc">
+                        <div class="crypto-icon">🟠</div>
+                        <div class="crypto-name">Bitcoin</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="doge">
+                        <div class="crypto-icon">🐕</div>
+                        <div class="crypto-name">DOGE</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="ltc">
+                        <div class="crypto-icon">🔵</div>
+                        <div class="crypto-name">Litecoin</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="usdc">
+                        <div class="crypto-icon">💙</div>
+                        <div class="crypto-name">USDC ERC20</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Withdraw Screen -->
+            <div class="screen withdraw-screen" id="withdrawScreen">
+                <div class="screen-title">WITHDRAWAL</div>
+                <div class="crypto-grid">
+                    <div class="crypto-option" data-crypto="ltc">
+                        <div class="crypto-icon">🔵</div>
+                        <div class="crypto-name">LiteCoin<br>[Min. 15 AI C]</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="trx">
+                        <div class="crypto-icon">🔴</div>
+                        <div class="crypto-name">TRON<br>[Min. 41 AI C]</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="bnb">
+                        <div class="crypto-icon">🟡</div>
+                        <div class="crypto-name">BNB<br>[Min. 29 AI C]</div>
+                    </div>
+                    <div class="crypto-option" data-crypto="ton">
+                        <div class="crypto-icon">🔷</div>
+                        <div class="crypto-name">TON<br>[Min. 27 AI C]</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friends Screen -->
+            <div class="screen friends-screen" id="friendsScreen">
+                <div class="screen-title">REFERRAL PROGRAM</div>
+                <div class="referral-info">
+                    <p>For each active friend* (referred as referral) who joins through your link, you will receive a bonus of 3 AI. Additionally, you will receive a percentage of all their bets and even the bets of friends they invite, up to the 3rd level.</p>
+                    
+                    <p>There is no limit to your earnings. Even a few invited friends can bring you significant income.</p>
+                    
+                    <div class="earning-structure">
+                        <div class="earning-level">You will receive 5% of the bet amount from a 1st level referral;</div>
+                        <div class="earning-level">You will receive 1% of the bet amount from a 2nd level referral;</div>
+                        <div class="earning-level">You will receive 1% of the bet amount from a 3rd level referral;</div>
+                    </div>
+                    
+                    <p>For example: if your referral bets 1000 AI, your profit will be 50 AI.</p>
+                    <p class="small-text">* Active friend - a referral who has placed 2 or more bets!</p>
+                    
+                    <div class="invite-section">
+                        <div class="invite-title">INVITE FRIENDS IN 2 CLICKS:</div>
+                        <button class="invite-btn" id="inviteBtn">INVITE FRIENDS</button>
+                    </div>
+                    
+                    <div class="warning">
+                        <strong>IMPORTANT:</strong> To prevent fraud and abuse, commissions from bets are only credited for friends who have topped up their balance!
+                    </div>
+                </div>
+                
+                <div class="referral-stats">
+                    <div class="stats-title">Your referrals by levels</div>
+                    <div class="level-stats">
+                        <div class="level-stat">
+                            <div class="level-name">1st lvl.</div>
+                            <div class="level-count">0 people.</div>
+                        </div>
+                        <div class="level-stat">
+                            <div class="level-name">2nd lvl.</div>
+                            <div class="level-count">0 people.</div>
+                        </div>
+                        <div class="level-stat">
+                            <div class="level-name">3rd lvl.</div>
+                            <div class="level-count">0 people.</div>
+                        </div>
+                    </div>
+                    <div class="no-referrals">You have no 1-level referrals</div>
+                </div>
+            </div>
+
+            <!-- Tasks Screen -->
+            <div class="screen tasks-screen" id="tasksScreen">
+                <div class="screen-title">TASKS LIST</div>
+                
+                <div class="task-category">
+                    <div class="category-title">Rewards for Friends</div>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <div class="task-icon">📢</div>
+                            <div class="task-details">
+                                <div class="task-name">Invite 3 active friends!</div>
+                                <div class="task-reward">⚡ 21 AI</div>
+                            </div>
+                            <div class="task-progress">0 / 3</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-icon">📢</div>
+                            <div class="task-details">
+                                <div class="task-name">Invite 7 active friends!</div>
+                                <div class="task-reward">⚡ 28 AI</div>
+                            </div>
+                            <div class="task-progress">0 / 7</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-icon">📢</div>
+                            <div class="task-details">
+                                <div class="task-name">Invite 15 active friends!</div>
+                                <div class="task-reward">⚡ 40 AI</div>
+                            </div>
+                            <div class="task-progress">0 / 15</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-icon">📢</div>
+                            <div class="task-details">
+                                <div class="task-name">Invite 50 active friends!</div>
+                                <div class="task-reward">⚡ 140 AI</div>
+                            </div>
+                            <div class="task-progress">0 / 50</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="task-category">
+                    <div class="category-title">Betting Rewards</div>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <div class="task-icon">🎯</div>
+                            <div class="task-details">
+                                <div class="task-name">Place 500 Bets!</div>
+                                <div class="task-reward">⚡ 25 AI</div>
+                            </div>
+                            <div class="task-progress">1 / 500</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-icon">🎯</div>
+                            <div class="task-details">
+                                <div class="task-name">Place 1000 Bets!</div>
+                                <div class="task-reward">⚡ 50 AI</div>
+                            </div>
+                            <div class="task-progress">1 / 1000</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-icon">🎯</div>
+                            <div class="task-details">
+                                <div class="task-name">Place 5000 Bets!</div>
+                                <div class="task-reward">⚡ 250 AI</div>
+                            </div>
+                            <div class="task-progress">1 / 5000</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-icon">🎯</div>
+                            <div class="task-details">
+                                <div class="task-name">Place 25000 Bets!</div>
+                                <div class="task-reward">⚡ 1250 AI</div>
+                            </div>
+                            <div class="task-progress">1 / 25000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Deposit Details -->
+            <div class="screen crypto-details-screen" id="cryptoDetailsScreen" style="display: none;">
+                <div class="screen-title">Choose another method</div>
+                <div class="crypto-deposit-info">
+                    <div class="deposit-method-title" id="depositMethodTitle">Deposit via TON</div>
+                    <div class="deposit-description">
+                        We have generated your personal wallet, which you can use to top up your balance.
+                        <br><br>
+                        Send any amount greater than $3 to this wallet, and it will automatically be credited to your balance.
+                    </div>
+                    <div class="wallet-address" id="walletAddress">UQAYxMEw3LEdoV6fQ0xYf62boGFqlNnbAUCLL7zq4ks</div>
+                    <button class="copy-wallet-btn" id="copyWalletBtn">✅ Wallet copied ✅</button>
+                    <div class="exchange-rate" id="exchangeRate">Exchange rate 1 TON = 316.06 AI</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn" data-screen="friends">
+                <div class="nav-icon">👥</div>
+                <span>Friends</span>
+            </button>
+            <button class="nav-btn" data-screen="deposit">
+                <div class="nav-icon">💰</div>
+                <span>Deposit</span>
+            </button>
+            <button class="nav-btn active" data-screen="game">
+                <div class="nav-icon">🎮</div>
+                <span>Play</span>
+            </button>
+            <button class="nav-btn" data-screen="withdraw">
+                <div class="nav-icon">💸</div>
+                <span>Withdraw</span>
+            </button>
+            <button class="nav-btn" data-screen="tasks">
+                <div class="nav-icon">📋</div>
+                <span>Tasks</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="game.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
