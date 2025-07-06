@@ -1,6 +1,8 @@
-# Casino Roll Backend Middleware
+"""
+🎰 Casino Roll - Middleware Package
+"""
 
-from .rate_limiter import RateLimitMiddleware
+from .rate_limit import RateLimitMiddleware
 from .security import SecurityMiddleware
 
 __all__ = ["RateLimitMiddleware", "SecurityMiddleware"]

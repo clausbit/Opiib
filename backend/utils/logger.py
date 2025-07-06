@@ -184,9 +184,30 @@ class CasinoLogger:
 # Глобальный экземпляр логгера
 casino_logger = CasinoLogger()
 
-def setup_logger(name: str = __name__) -> logging.Logger:
-    """Функция для получения логгера в модулях"""
-    return logging.getLogger(f"casino_roll.{name}")
+def setup_logger(name: str) -> logging.Logger:
+    """Setup colored logger"""
+    logger = logging.getLogger(name)
+    
+    if not logger.handlers:
+        handler = logging.StreamHandler(sys.stdout)
+        formatter = ColoredFormatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        )
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+    
+    return logger
+
+def log_security(event_type: str, details: str = ""):
+    """Log security event"""
+    logger = logging.getLogger("security")
+    logger.warning(f"SECURITY: {event_type} - {details}")
+
+def log_performance(endpoint: str, duration: float, status_code: int):
+    """Log performance metrics"""
+    logger = logging.getLogger("performance")
+    logger.info(f"PERF: {endpoint} - {duration:.3f}s - {status_code}")
 
 # Функции для быстрого доступа к специальным логам
 def log_game(user_id: int, event: str, **data):
