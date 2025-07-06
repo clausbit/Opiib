@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>🎰 Casino Roll - agrobmin.com.ua</title>
+    
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    
+    <!-- Meta Tags for Telegram -->
+    <meta name="telegram:domain" content="{{ domain }}">
+    <meta name="telegram:webapp" content="{{ webapp_url }}">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-container">
+            <div class="logo-container">
+                <div class="logo">🎰 Casino Roll</div>
+                <div class="subtitle">agrobmin.com.ua</div>
+            </div>
+            
+            <div class="spinner-container">
+                <div class="neon-spinner"></div>
+            </div>
+            
+            <div class="loading-text">Загрузка казино...</div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <!-- Animated Background -->
+        <div class="animated-bg">
+            <div class="neon-grid"></div>
+            <div class="floating-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Background Effects -->
+        <div class="background-effects">
+            <div class="neon-grid"></div>
+            <div class="floating-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            <div class="gradient-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-container">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img id="user-photo" src="/static/images/default-avatar.png" alt="Avatar">
+                        <div class="avatar-glow"></div>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name" id="user-name">Загрузка...</div>
+                        <div class="user-id" id="user-id">ID: ...</div>
+                    </div>
+                </div>
+                
+                <div class="balance-display">
+                    <div class="balance-container">
+                        <div class="balance-label">Баланс</div>
+                        <div class="balance-amount" id="balance-amount">0.0 AI</div>
+                    </div>
+                    <div class="balance-actions">
+                        <button class="btn-deposit" onclick="openDeposit()">
+                            <span class="btn-icon">💳</span>
+                        </button>
+                        <button class="btn-withdraw" onclick="openWithdraw()">
+                            <span class="btn-icon">💸</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Game Section -->
+            <div class="game-section">
+                <div class="game-title">
+                    <h1>🎰 Casino Roll</h1>
+                    <p>Выберите цвет и выиграйте!</p>
+                </div>
+
+                <!-- Roulette Wheel -->
+                <div class="roulette-container">
+                    <div class="roulette-wheel" id="roulette-wheel">
+                        <div class="wheel-segments">
+                            <div class="segment red" data-color="red"></div>
+                            <div class="segment blue" data-color="blue"></div>
+                            <div class="segment red" data-color="red"></div>
+                            <div class="segment blue" data-color="blue"></div>
+                            <div class="segment green" data-color="green"></div>
+                            <div class="segment red" data-color="red"></div>
+                            <div class="segment blue" data-color="blue"></div>
+                            <div class="segment red" data-color="red"></div>
+                            <div class="segment blue" data-color="blue"></div>
+                            <div class="segment yellow" data-color="yellow"></div>
+                        </div>
+                        <div class="wheel-center">
+                            <div class="center-dot"></div>
+                        </div>
+                        <div class="wheel-pointer"></div>
+                    </div>
+                    
+                    <div class="roulette-status">
+                        <div id="game-status">Сделайте ставку!</div>
+                    </div>
+                </div>
+
+                <!-- Color Selection -->
+                <div class="color-selection">
+                    <div class="colors-grid">
+                        <div class="color-option" data-color="red" onclick="selectColor('red')">
+                            <div class="color-circle red"></div>
+                            <div class="color-info">
+                                <div class="color-name">Красный</div>
+                                <div class="color-multiplier">x2.2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="color-option" data-color="blue" onclick="selectColor('blue')">
+                            <div class="color-circle blue"></div>
+                            <div class="color-info">
+                                <div class="color-name">Синий</div>
+                                <div class="color-multiplier">x2.2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="color-option" data-color="green" onclick="selectColor('green')">
+                            <div class="color-circle green"></div>
+                            <div class="color-info">
+                                <div class="color-name">Зеленый</div>
+                                <div class="color-multiplier">x5</div>
+                            </div>
+                        </div>
+                        
+                        <div class="color-option" data-color="yellow" onclick="selectColor('yellow')">
+                            <div class="color-circle yellow"></div>
+                            <div class="color-info">
+                                <div class="color-name">Желтый</div>
+                                <div class="color-multiplier">x45</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bet Controls -->
+                <div class="bet-controls">
+                    <div class="bet-amount-section">
+                        <div class="section-title">Сумма ставки</div>
+                        
+                        <div class="bet-input-container">
+                            <button class="btn-bet-control" onclick="decreaseBet()">−</button>
+                            <div class="bet-amount-display">
+                                <input type="number" id="bet-amount" value="5" min="1" max="1000">
+                                <span class="currency">AI</span>
+                            </div>
+                            <button class="btn-bet-control" onclick="increaseBet()">+</button>
+                        </div>
+                        
+                        <div class="quick-bet-buttons">
+                            <button class="quick-bet" onclick="setBetAmount(1)">1</button>
+                            <button class="quick-bet" onclick="setBetAmount(5)">5</button>
+                            <button class="quick-bet" onclick="setBetAmount(10)">10</button>
+                            <button class="quick-bet" onclick="setBetAmount(25)">25</button>
+                            <button class="quick-bet" onclick="setBetAmount(50)">50</button>
+                            <button class="quick-bet" onclick="setBetAmount(100)">100</button>
+                        </div>
+                    </div>
+
+                    <div class="potential-win" id="potential-win">
+                        Потенциальный выигрыш: <span>0 AI</span>
+                    </div>
+
+                    <button class="btn-place-bet" id="place-bet-btn" onclick="placeBet()" disabled>
+                        <span class="btn-text">Выберите цвет</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game History -->
+            <div class="game-history">
+                <div class="section-title">
+                    <span>🕐 История игр</span>
+                    <button class="refresh-btn" onclick="refreshHistory()">↻</button>
+                </div>
+                
+                <div class="history-container">
+                    <div class="last-results">
+                        <div class="results-title">Последние результаты:</div>
+                        <div class="results-circles" id="last-results"></div>
+                    </div>
+                    
+                    <div class="history-list" id="history-list">
+                        <div class="no-history">История пуста</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" onclick="openTab('game')">
+                <div class="nav-icon">🎰</div>
+                <div class="nav-label">Игра</div>
+            </div>
+            
+            <div class="nav-item" onclick="openTab('stats')">
+                <div class="nav-icon">📊</div>
+                <div class="nav-label">Статистика</div>
+            </div>
+            
+            <div class="nav-item" onclick="openTab('friends')">
+                <div class="nav-icon">👥</div>
+                <div class="nav-label">Друзья</div>
+            </div>
+            
+            <div class="nav-item" onclick="openTab('tasks')">
+                <div class="nav-icon">🎯</div>
+                <div class="nav-label">Задания</div>
+            </div>
+            
+            <div class="nav-item" onclick="openTab('profile')">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Профиль</div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Win Notification -->
+    <div id="win-notification" class="win-notification">
+        <div class="win-content">
+            <div class="win-icon">🎉</div>
+            <div class="win-amount" id="win-amount">+0 AI</div>
+            <div class="win-text">Поздравляем!</div>
+        </div>
+        <div class="confetti"></div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Audio Elements -->
+    <audio id="sound-spin" preload="auto">
+        <source src="/static/sounds/roulette-spin.mp3" type="audio/mpeg">
+        <source src="/static/sounds/roulette-spin.ogg" type="audio/ogg">
+    </audio>
+    
+    <audio id="sound-win" preload="auto">
+        <source src="/static/sounds/win.mp3" type="audio/mpeg">
+        <source src="/static/sounds/win.ogg" type="audio/ogg">
+    </audio>
+    
+    <audio id="sound-lose" preload="auto">
+        <source src="/static/sounds/lose.mp3" type="audio/mpeg">
+        <source src="/static/sounds/lose.ogg" type="audio/ogg">
+    </audio>
+    
+    <audio id="sound-click" preload="auto">
+        <source src="/static/sounds/click.mp3" type="audio/mpeg">
+        <source src="/static/sounds/click.ogg" type="audio/ogg">
+    </audio>
+
+    <!-- JavaScript -->
+    <script src="/static/js/telegram.js"></script>
+    <script src="/static/js/sounds.js"></script>
+    <script src="/static/js/game.js"></script>
+    <script src="/static/js/ui.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
